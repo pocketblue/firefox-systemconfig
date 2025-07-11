@@ -1,0 +1,21 @@
+id: org.mozilla.firefox.systemconfig
+runtime: org.mozilla.firefox
+branch: stable
+runtime-version: stable
+sdk: org.freedesktop.Sdk//24.08
+build-extension: true
+separate-locales: false
+modules:
+  - name: mobile-config-firefox
+    buildsystem: simple
+    sources:
+      - type: git
+        url: https://gitlab.postmarketos.org/postmarketOS/mobile-config-firefox
+        commit: 1c09ac885e7e5ebc5f40270b99f8f3b8d56823af
+      - type: patch
+        paths:
+          - autoconfig.patch
+    build-commands:
+      - make install DESTDIR=/app/etc/firefox FIREFOX_DIR="" FIREFOX_CONFIG_DIR=""
+      - mv /app/etc/firefox/etc/mobile-config-firefox /app/etc/firefox/mobile-config-firefox
+      - rmdir /app/etc/firefox/etc
