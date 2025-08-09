@@ -12,6 +12,9 @@ modules:
       - type: git
         url: https://gitlab.postmarketos.org/postmarketOS/mobile-config-firefox
         commit: 1c09ac885e7e5ebc5f40270b99f8f3b8d56823af
+        tag: 4.6.0
+        x-checker-data:
+          type: git
       - type: patch
         paths:
           - autoconfig.patch
