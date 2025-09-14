@@ -19,6 +19,10 @@ modules:
         paths:
           - autoconfig.patch
     build-commands:
+      # get all firefox search engines back
+      # disable annoying check for default browser
+      - jq 'del(.policies.SearchEngines)|.policies.DontCheckDefaultBrowser=true' src/policies.json | tee src/policies.tmp
+      - mv src/policies.tmp src/policies.json
       - make install DESTDIR=/app/etc/firefox FIREFOX_DIR="" FIREFOX_CONFIG_DIR=""
       - mv /app/etc/firefox/etc/mobile-config-firefox /app/etc/firefox/mobile-config-firefox
       - rmdir /app/etc/firefox/etc
