@@ -2,7 +2,7 @@ id: org.mozilla.firefox.systemconfig
 runtime: org.mozilla.firefox
 branch: stable
 runtime-version: stable
-sdk: org.freedesktop.Sdk//24.08
+sdk: org.freedesktop.Sdk//25.08
 build-extension: true
 separate-locales: false
 modules:
