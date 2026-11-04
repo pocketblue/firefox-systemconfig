@@ -10,20 +10,15 @@ modules:
     buildsystem: simple
     sources:
       - type: git
-        url: https://gitlab.postmarketos.org/postmarketOS/mobile-config-firefox
-        commit: f7f638bdec28cf149fef73b5c17e01f2c977e276
-        tag: 4.6.1
+        url: https://gitlab.nura.eco/nura/mobile-config-firefox
+        commit: 84913a3c67099f335cb94a55de7bd469b09ee23e
+        tag: 5.5.2
         x-checker-data:
           type: git
-      - type: patch
-        paths:
-          - autoconfig.patch
     build-commands:
       # get all firefox search engines back
       # disable annoying check for default browser
       - jq 'del(.policies.SearchEngines)|.policies.DontCheckDefaultBrowser=true' src/policies.json
         | tee src/policies.tmp
       - mv src/policies.tmp src/policies.json
-      - make install DESTDIR=/app/etc/firefox FIREFOX_DIR="" FIREFOX_CONFIG_DIR=""
-      - mv /app/etc/firefox/etc/mobile-config-firefox /app/etc/firefox/mobile-config-firefox
-      - rmdir /app/etc/firefox/etc
+      - make FLATPAK=1 FLATPAK_EXT_DIR=/app/etc/firefox install
